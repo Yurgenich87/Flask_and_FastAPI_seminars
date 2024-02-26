@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>{{ title }}</title>
 </head>
 <body>
-$END$
+    <h1 class="text-monospace">Привет меня зовут {{ name }}</h1>
+
+    <img src="{{ url_for('static', filename='image/foto.png') }}" alt="Моё фото" width="300">
+    <p class="text-body text-justify">jdsfkjsdhfkjhdshfsdjfhkjsadhf dshfksdjfjksda dfjhsdakjfjsdab dsajfdsabf</p>
+    <p class="alert-dark">Все права защищены</p>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

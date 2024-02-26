@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>{{ title }}</title>
+    <link rel="stylesheet" href="../../Home_work_2/static/css/bootstrap.css">
+    <style>
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h3>Меню</h3>
+                    <ul>
+                            <li><a href="/Home_work_1/static">Главная</a></li>
+                            <li><a href="/clothing">Одежда</a></li>
+                            <li><a href="/shoes">Обувь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="content">
+                    <header>
+                        <h1>"Краски Стиля"</h1>
+                    </header>
+
+                    <main>
+                        {% block content %}
+                            hjdgdfadsfdsa
+                        {% endblock %}
+                    </main>
+
+                    <footer>
+                        <p>Все права защищены &copy;, 2024 г.</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

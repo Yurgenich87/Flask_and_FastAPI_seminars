@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <title>{{ Title }}</title>
 </head>
 <body>
-$END$
+    <div class="display-3">
+        {% if user %}
+            <p>Вы вошли под именем {{ user }}</p>
+        {% endif %}
+
+        <p>К прочтению предлагается {{ number }}
+            {% if number == 1 %}
+                пост
+            {% elif 2<=number <= 4 %}
+                поста
+            {% else %}
+                постов
+            {% endif %}
+        </p>
+
+    </div>
 </body>
 </html>

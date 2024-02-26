@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2>Добро пожаловать в наш магазин {{ title }}</h2>
+    <p>Изучите наш широкий ассортимент продукции:</p>
+        <ul>
+            {% for product in category['products'] %}
+            <li>{{ product['name'] }} - Цена: ${{ product['price'] }}</li>
+            {% endfor %}
+        </ul>
+
+    <p>Наш магазин специализируется на стильной одежде и аксессуарах для современных модниц.</p>
+{% endblock %}
