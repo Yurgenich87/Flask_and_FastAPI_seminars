@@ -1,9 +1,46 @@
-{% extends "base.html" %}
-
-{% block title %}{{ product.name }} - My Store{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h2>{{ product.name }}</h2>
-    <p>Price: ${{ product.price }}</p>
-    <p>Description: {{ product.description }}</p>
+
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <h2>{{ category }}</h2>
+    <div class="product-cards">
+        {% for product in products %}
+        <div class="product-card">
+            <img class="product-image" src="{{ url_for('static', filename='image/' + product['image']) }}" alt="{{ product['name'] }}">
+            <h3>{{ product['name'] }}</h3>
+            <p>{{ product['price'] }} руб.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<footer id="footer">
+    <div class="container footer-bottom clearfix">
+        <div class="social-links">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+        <div class="copyright">
+        &copy; Copyright <strong><span>{{ tab }}</span></strong>. All Rights Reserved
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block main %}
+    <main id="main">
+{{ block.super }}
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <footer id="footer">
+{{ block.super }}
+    </footer>
 {% endblock %}
