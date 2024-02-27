@@ -10,7 +10,7 @@ import sys
 import os
 
 sys.path.append(os.getcwd())
-from Home_work_1.app import db
+from Home_work.app import db
 
 # Это нужно для корректной работы Alembic
 config = context.config

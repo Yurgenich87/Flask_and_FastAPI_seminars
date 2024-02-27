@@ -52,7 +52,7 @@
     <section id="breadcrumbs" class="breadcrumbs">
         <ol class="container">
         {% if 'username' in session %}
-            <p> Пользователь: {{ session["username"] }}!   <a href="/login/">Выйти</a></p>
+            <p> Пользователь: {{ session["username"] }}!   <a href="/logout/">Выйти</a></p>
         {% else %}
             <p>Вы не вошли в систему. <a href="/login">Войти</a> или <a href="/register">Зарегистрироваться</a></p>
         {% endif %}
