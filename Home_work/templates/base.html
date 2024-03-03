@@ -40,9 +40,8 @@
         <ul>
           <li><a class="nav-link scrollto " href="/index">Главная</a></li>
           <li><a class="nav-link scrollto" href="/product">Товары</a></li>
-          <li><a class="nav-link scrollto" href="#services">Сервисы</a></li>
-          <li><a class="nav-link scrollto" href="#about">О сайте</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Контакты</a></li>
+          <li><a class="nav-link scrollto" href="/services">Сервисы</a></li>
+          <li><a class="nav-link scrollto" href="/contacts">Контакты</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
 
@@ -54,12 +53,38 @@
         {% if 'username' in session %}
             <p> Пользователь: {{ session["username"] }}!   <a href="/logout/">Выйти</a></p>
         {% else %}
-            <p>Вы не вошли в систему. <a href="/login">Войти</a> или <a href="/register">Зарегистрироваться</a></p>
+            <p> {{ session["username"] }}Вы не вошли в систему. <a href="/login">Войти</a></p>
         {% endif %}
+
         </ol>
 
+  <ol>
+    <li><a href="/index">{{ title }}</a>{% if category %} / {{ category }}{% endif %}</li>
+  </ol>
 
-  {% block content %}{% endblock %}
+  {% block content %}Страница находится в разработке{% endblock %}
+  <footer id="footer">
+      <div class="footer">
+
+          <div class="container footer-bottom clearfix">
+              <div style="margin-top: 20px;"></div>
+
+              <div class="social-links">
+                <a href="#" class="twitter"><i class="bx bxl-twitter" style="font-size: 24px;"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook" style="font-size: 24px;"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram" style="font-size: 24px;"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype" style="font-size: 24px;"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin" style="font-size: 24px;"></i></a>
+              </div>
+
+              <div style="margin-top: 10px;"></div>
+
+              <div class="copyright">
+                  &copy; Copyright <strong><span>{{ tab }}</span></strong>. All Rights Reserved
+              </div>
+          </div>
+      </div>
+  </footer><!-- End Footer-top -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

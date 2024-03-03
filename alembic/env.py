@@ -10,17 +10,17 @@ import sys
 import os
 
 sys.path.append(os.getcwd())
-from Home_work.app import db
+from Home_work.app_main import db_users
 
 # Это нужно для корректной работы Alembic
 config = context.config
 fileConfig(config.config_file_name)
 
 # Укажите объект метаданных вашей базы данных SQLAlchemy
-target_metadata = db.metadata
+target_metadata = db_users.metadata
 
 # Здесь необходимо передать объект метаданных в Alembic
-config.set_main_option('sqlalchemy.url', str(db.engine.url))
+config.set_main_option('sqlalchemy.url', str(db_users.engine.url))
 
 
 def run_migrations_offline():
