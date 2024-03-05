@@ -1,7 +1,7 @@
 import requests
-from multiprocessing import Process
 import time
-
+import asyncio
+import aiohttp
 
 urls = ['https://www.google.ru',
         'https://gb.ru',
@@ -11,22 +11,25 @@ urls = ['https://www.google.ru',
         ]
 
 
-def download(url):
-    response = requests.get(url)
-    filename = 'multiproc_' + url.replace('https://', '').replace('.', '_').replace('/', '') + '.html'
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write(response.text)
-    print(f'Downloaded {url} in {time.time() - start_time:.2f} seconds')
+async def download(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            text = await response.text()
+            filename = 'async_' + url.replace('https://', '').replace('.', '_').replace('/', '') + '.html'
+            with open(filename, 'w', encoding='utf-8') as f:
+                f.write(text)
+            print(f'Downloaded {url} in {time.time() - start_time:.2f} seconds')
 
 
-processes = []
+async def main():
+    tasks = []
+    for url in urls:
+        task = asyncio.ensure_future(download(url))
+        tasks.append(task)
+    await asyncio.gather(*tasks)
+
 start_time = time.time()
 
 if __name__ == '__main__':
-    for url in urls:
-        process = Process(target=download, args=(url,))
-        processes.append(process)
-        process.start()
-
-    for process in processes:
-        process.join()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())

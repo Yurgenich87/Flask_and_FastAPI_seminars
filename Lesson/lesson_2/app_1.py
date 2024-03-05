@@ -1,7 +1,7 @@
 from pathlib import PurePath, Path
-from flask import Flask, url_for, request, render_template, abort, redirect, flash, make_response, session
+from flask import Flask, url_for, request, render_template, abort, redirect, flash, session
 from werkzeug.utils import secure_filename
-from Lesson.templates.db import get_blog
+from Lesson.lesson_2.templates.db import get_blog
 
 
 app = Flask(__name__)
