@@ -6,9 +6,15 @@
     <div class="product-cards">
         {% for product in products %}
         <div class="product-card">
-            <img class="product-image" src="{{ url_for('static', filename='image/' + product['image']) }}" alt="{{ product['name'] }}">
-            <h3>{{ product['name'] }}</h3>
-            <p>{{ product['price'] }} руб.</p>
+            <img class="product-image" src="{{ url_for('static', filename='image/' + product.image) }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.price }} руб.</p>
+            <p>{{ product.content }}</p>
+            {% if 'cart' in session and product.product_id in session['cart'] %}
+                <p>Товар уже в корзине</p>
+            {% else %}
+                <a href="{{ url_for('add_to_cart', product_id=product.product_id) }}" class="btn btn-primary">Добавить в корзину</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

@@ -6,21 +6,74 @@
 <div style="text-align: center;">
     <form method="POST" action="{{ url_for('register') }} ">
         {{ form.csrf_token }}
-        {% for field in form if field.name != 'csrf_token' %}
         <p>
-            {{ field.label }}<br>
-            {{ field }}
-            {% if field.errors %}
+            {{ form.username.label }}<br>
+            {{ form.username }}
+            {% if form.username.errors %}
+        <ul class="alert alert-danger">
+            {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </p>
+        <p>
+        {{ form.first_name.label }}<br>
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+        <ul class="alert alert-danger">
+        {% for error in form.first_name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+        </p>
+        <p>
+        {{ form.last_name.label }}<br>
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+        <ul class="alert alert-danger">
+        {% for error in form.last_name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email }}
+            {% if form.email.errors %}
             <ul class="alert alert-danger">
-                {% for error in field.errors %}
+                {% for error in form.email.errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
             </ul>
             {% endif %}
         </p>
-        {% endfor %}
         <p>
-            <input type="submit" value="Зарегистрироваться">
+            {{ form.password.label }}<br>
+            {{ form.password }}
+            {% if form.password.errors %}
+            <ul class="alert alert-danger">
+                {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password }}
+            {% if form.confirm_password.errors %}
+            <ul class="alert alert-danger">
+                {% for error in form.confirm_password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </p>
+        <p>
+            <input type="submit" value="Register">
         </p>
     </form>
 </div>

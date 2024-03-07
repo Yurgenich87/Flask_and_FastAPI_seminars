@@ -42,12 +42,25 @@
           <li><a class="nav-link scrollto" href="/product">Товары</a></li>
           <li><a class="nav-link scrollto" href="/services">Сервисы</a></li>
           <li><a class="nav-link scrollto" href="/contacts">Контакты</a></li>
+          <li>
+            {% if 'username' in session %}
+                {% if total_price == 0 %}
+                    <a class="nav-link scrollto" href="/cart">Корзина: 0 руб.</a>
+                {% else %}
+                    <a class="nav-link scrollto" href="/cart">Корзина: {{ total_price }} руб.</a>
+                {% endif %}
+            {% else %}
+                <a class="nav-link scrollto" href="/login"></a>
+            {% endif %}          </li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+
+          <i class="bi bi-list mobile-nav-toggle"></i>
 
       </nav><!-- .navbar -->
     </div>
   </header><!-- End Header -->
+
+
     <section id="breadcrumbs" class="breadcrumbs">
         <ol class="container">
         {% if 'username' in session %}

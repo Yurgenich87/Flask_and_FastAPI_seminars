@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+
+                <div style="margin-top:150px;"></div>
+
+                <h3>Товары в корзине:</h3>
+                {% if products %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Наименование</th>
+                                <th scope="col">Количество</th>
+                                <th scope="col">Цена</th>
+                                <th scope="col">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.quantity }} шт.</td>
+                                    <td>{{ product.price }} руб.</td>
+                                    <td>
+                                    <form method="post">
+                                        <input type="hidden" name="cart_id" value="{{ product.cart_id }}">
+                                        <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                                        <button type="submit" class="btn btn-primary">Купить</button>
+                                    </form>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Ваша корзина пуста</p>
+                {% endif %}
+
+                <div style="margin-top: 70px;"></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

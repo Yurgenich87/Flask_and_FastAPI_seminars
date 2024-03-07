@@ -1,41 +1,45 @@
-from app_main import db_users, Product, app
+clothing_products = [
+    {'name': 'Футболка "Basic"', 'price': 15.99, 'content': 'Простая футболка для повседневного ношения',
+     'image': 'basic_tshirt.png', 'category': 'Футболки'},
+    {'name': 'Джинсы "Slim Fit"', 'price': 49.99, 'content': 'Узкие джинсы с классическим дизайном',
+     'image': 'slim_fit_jeans.png', 'category': 'Джинсы'},
+    {'name': 'Платье "Элегантность"', 'price': 79.99, 'content': 'Элегантное платье для особых случаев',
+     'image': 'elegance_dress.png', 'category': 'Платья'},
+    {'name': 'Рубашка "Офисная"', 'price': 39.99, 'content': 'Классическая рубашка для делового стиля',
+     'image': 'office_shirt.png', 'category': 'Рубашки'},
+    {'name': 'Джеггинсы "Супер-удобные"', 'price': 29.99,
+     'content': 'Комбинированные джинсы и леггинсы для максимального комфорта', 'image': 'super_comfy_jeggings.png',
+     'category': 'Джеггинсы'},
+    {'name': 'Пальто "Версаль"', 'price': 99.99, 'content': 'Элегантное пальто для стильных дам',
+     'image': 'versailles_coat.png', 'category': 'Пальто'},
+    {'name': 'Толстовка "Street Style"', 'price': 34.99, 'content': 'Модная толстовка для уличного стиля',
+     'image': 'street_style_sweatshirt.png', 'category': 'Толстовки'},
+    {'name': 'Юбка "Ретро"', 'price': 24.99, 'content': 'Ретро-стильная юбка для винтажного образа',
+     'image': 'retro_skirt.png', 'category': 'Юбки'},
+    {'name': 'Бомбер "Спортивный"', 'price': 59.99, 'content': 'Трендовый бомбер для спортивного стиля',
+     'image': 'sporty_bomber.png', 'category': 'Куртки'},
+    {'name': 'Брюки "Деловые"', 'price': 44.99, 'content': 'Классические брюки для офисного стиля',
+     'image': 'business_trousers.png', 'category': 'Брюки'},
+    {'name': 'Свитер "Скандинавский"', 'price': 54.99, 'content': 'Теплый свитер с скандинавским узором',
+     'image': 'scandinavian_sweater.png', 'category': 'Свитера'},
+    {'name': 'Куртка "Байкерская"', 'price': 89.99, 'content': 'Стильная куртка в байкерском стиле',
+     'image': 'biker_jacket.png', 'category': 'Куртки'},
+    {'name': 'Шорты "Пляжные"', 'price': 19.99, 'content': 'Легкие шорты для пляжного отдыха',
+     'image': 'beach_shorts.png', 'category': 'Шорты'},
+    {'name': 'Пиджак "Сакко"', 'price': 74.99, 'content': 'Элегантный пиджак для делового стиля',
+     'image': 'sack_coat.png', 'category': 'Пиджаки'},
+    {'name': 'Туника "Бохо"', 'price': 39.99, 'content': 'Уютная туника в стиле бохо', 'image': 'boho_tunic.png',
+     'category': 'Туники'},
+    {'name': 'Блузка "Эффектная"', 'price': 29.99, 'content': 'Блузка с оригинальным дизайном',
+     'image': 'stylish_blouse.png', 'category': 'Блузки'},
+    {'name': 'Шарф "Утепленный"', 'price': 9.99, 'content': 'Теплый шарф для холодных дней',
+     'image': 'warm_scarf.png', 'category': 'Аксессуары'},
+    {'name': 'Сарафан "Летний"', 'price': 34.99, 'content': 'Легкий летний сарафан для жарких дней',
+     'image': 'summer_dress.png', 'category': 'Сарафаны'},
+    {'name': 'Пуловер "Шерстяной"', 'price': 49.99, 'content': 'Пуловер из натуральной шерсти',
+     'image': 'wool_pullover.png', 'category': 'Пуловеры'},
+    {'name': 'Блейзер "Офисный"', 'price': 64.99, 'content': 'Классический блейзер для офисного стиля',
+     'image': 'office_blazer.png', 'category': 'Блейзеры'},
+]
 
-
-@app.route('/add_products_to_database')
-def add_products_to_database():
-    products = [
-        {'name': 'Футболка', 'price': 20, 'image': 'tshirt.png', 'category': 'Одежда'},
-        {'name': 'Джинсы', 'price': 50, 'image': 'jeans.png', 'category': 'Одежда'},
-        {'name': 'Кофта', 'price': 30, 'image': 'sweater.png', 'category': 'Одежда'},
-        {'name': 'Платье', 'price': 60, 'image': 'dress.png', 'category': 'Одежда'},
-        {'name': 'Пиджак', 'price': 70, 'image': 'blazer.png', 'category': 'Одежда'},
-        {'name': 'Юбка', 'price': 40, 'image': 'skirt.png', 'category': 'Одежда'},
-        {'name': 'Рубашка', 'price': 35, 'image': 'shirt.png', 'category': 'Одежда'},
-        {'name': 'Пальто', 'price': 80, 'image': 'coat.png', 'category': 'Одежда'},
-        {'name': 'Брюки', 'price': 45, 'image': 'pants.png', 'category': 'Одежда'},
-        {'name': 'Шорты', 'price': 25, 'image': 'shorts.png', 'category': 'Одежда'},
-        {'name': 'Кросовки', 'price': 70, 'image': 'sneakers.png', 'category': 'Обувь'},
-        {'name': 'Сапоги', 'price': 100, 'image': 'boots.png', 'category': 'Обувь'},
-        {'name': 'Туфли на каблуке', 'price': 90, 'image': 'heels.png', 'category': 'Обувь'},
-        {'name': 'Мокасины', 'price': 60, 'image': 'moccasins.png', 'category': 'Обувь'},
-        {'name': 'Ботфорты', 'price': 110, 'image': 'high_boots.png', 'category': 'Обувь'},
-        {'name': 'Балетки', 'price': 45, 'image': 'ballet_flats.png', 'category': 'Обувь'},
-        {'name': 'Сандалии', 'price': 80, 'image': 'sandals.png', 'category': 'Обувь'},
-        {'name': 'Лоферы', 'price': 55, 'image': 'loafers.png', 'category': 'Обувь'},
-        {'name': 'Эспадрильи', 'price': 75, 'image': 'espadrilles.png', 'category': 'Обувь'},
-        {'name': 'Полуботинки', 'price': 85, 'image': 'oxfords.png', 'category': 'Обувь'}
-    ]
-
-    for product_data in products:
-        product = Product(
-            name=product_data['name'],
-            price=product_data['price'],
-            image=product_data['image'],
-            category=product_data['category']
-        )
-        db_users.session.add(product)
-
-    db_users.session.commit()
-
-    return 'Products added to database successfully!'
 
