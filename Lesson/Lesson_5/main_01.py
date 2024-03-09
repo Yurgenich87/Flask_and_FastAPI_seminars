@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic_tests import BaseModel
 from fastapi.logger import logger
 
 app = FastAPI()

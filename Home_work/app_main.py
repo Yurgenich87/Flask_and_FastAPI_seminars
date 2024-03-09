@@ -1,21 +1,24 @@
 import secrets
+
+from fastapi import FastAPI
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from Home_work.models import db_users, User, Product, CartItem, Order
+from Home_work.models import db_users, User, Product, CartItem, Order, Item_P
 from flask_wtf import FlaskForm, CSRFProtect
 from data_base import clothing_products
 from forms import LoginForm, RegistrationForm
 
 app = Flask(__name__)
+
 csrf = CSRFProtect(app)
 app.config['WTF_CSRF_ENABLED'] = False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Yurgenich/Desktop/PYTHON/Flask_and_FastAPI_seminars/instance/shop.db'
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Yurgenich/Desktop/PYTHON/Flask_and_FastAPI_seminars/instance/shop.db'
 db_users.init_app(app)
 target_metadata = db_users.metadata
-
 
 # Создаем таблицы
 with app.app_context():
@@ -27,7 +30,6 @@ with app.app_context():
 >>> secrets.token_hex()
 """
 app.config['SECRET_KEY'] = b'487fd588d63ce2c6196ee322af441c437394ce68beebb442c91228bdc69ad67b'
-
 
 # Название интернет-магазина
 app.config['STORE'] = '"Краски стиля"'
@@ -205,7 +207,9 @@ def get_total_price():
     username = session.get('username')
     user = User.query.filter_by(username=username).first()
     if user:
+        user.update_total_price()
         return user.total_price
+
     else:
         return 0
 
@@ -241,7 +245,7 @@ def cart():
     for cart_item in cart_items:
         product = cart_item.product
         products.append({'cart_id': cart_item.cart_id, 'name': product.product_name, 'price': product.price,
-                         'quantity': cart_item.quantity})
+                         'quantity': cart_item.quantity, 'product_id': product.product_id})
 
     return render_template('cart.html', category=category, tab=tab, title=title,
                            products=products, total_price=get_total_price())
@@ -265,13 +269,11 @@ def add_to_cart(product_id):
 
 
 @app.route('/create_order/')
-def create_order():
-
+def create_order(product_id):
     if not get_user_id():
         return redirect(url_for('login'))
 
     cart_item = CartItem.query.filter_by(cart_id=1, status='active').all()
-    product_id = cart_item.product_id
 
     order = Order(user_id=get_user_id(), product_id=product_id)
 
@@ -302,7 +304,8 @@ def product():
 @app.cli.command("add-products")
 def add_products_to_database():
     for product_data in clothing_products:
-        new_product = Product(product_name=product_data['name'], price=product_data['price'], content=product_data['content'],
+        new_product = Product(product_name=product_data['name'], price=product_data['price'],
+                              content=product_data['content'],
                               image=product_data['image'], category=product_data['category'])
         db_users.session.add(new_product)
 
@@ -311,4 +314,3 @@ def add_products_to_database():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

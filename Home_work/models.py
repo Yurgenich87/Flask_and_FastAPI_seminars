@@ -1,7 +1,20 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from pydantic import Field, BaseModel
 
 db_users = SQLAlchemy()
+
+
+# class User_P:
+#     username: str = Field(..., title='Никнейм', max_length=80)
+#     first_name: str = Field(..., title='Имя', max_length=80)
+#     last_name: str = Field(..., title='Фамилия', max_length=80)
+#     email: str = Field(..., title='email', max_length=120)
+#     password: str = Field(..., title='Пароль', max_length=120)
+#     created_at: datetime
+#     is_logged_in: bool
+#     last_login: datetime
+#     total_price: float
 
 
 class User(db_users.Model):
@@ -37,6 +50,14 @@ class User(db_users.Model):
         db_users.session.commit()
 
 
+# class Product_P(BaseModel):
+#     product_name: str
+#     price: float = Field(..., title='Цена', gt=0, le=100000)
+#     content: str
+#     image: str
+#     category: str
+
+
 class Product(db_users.Model):
     product_id = db_users.Column(db_users.Integer, primary_key=True)
     product_name = db_users.Column(db_users.String(100), nullable=False)
@@ -47,6 +68,13 @@ class Product(db_users.Model):
 
     def __repr__(self):
         return f'Product({self.title}, {self.content})'
+
+
+# class Item_P(BaseModel):
+#     name: str = Field(title="Name", max_length=50)
+#     price: float = Field(title="Price", gt=0, le=100000)
+#     description: str = Field(default=None, title="Description", max_length=1000)
+#     tax: float = Field(0, title="Tax", ge=0, le=10)
 
 
 class CartItem(db_users.Model):

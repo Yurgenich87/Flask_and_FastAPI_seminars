@@ -22,6 +22,7 @@
                         <tbody>
                             {% for product in products %}
                                 <tr>
+                                    <td>{{ product.product_id }}</td>
                                     <td>{{ product.name }}</td>
                                     <td>{{ product.quantity }} шт.</td>
                                     <td>{{ product.price }} руб.</td>
